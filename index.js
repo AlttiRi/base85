@@ -1,7 +1,16 @@
-const chars = `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`;
+const ascii58 = `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`;
+const z85     = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`;
 
-/** @param {Uint8Array} ui8a */
-export function encode(ui8a) {
+function getMap(charset) {
+    if (charset === "z85")      {return z85;}
+    if (charset?.length === 85) {return charset;}
+    return ascii58;
+}
+
+/** @param {Uint8Array} ui8a
+ *  @param {"ascii58"|"z85"|String} [charset="ascii58"] */
+export function encode(ui8a, charset) {
+    const chars = getMap(charset);
     const res = [];
 
     function encode4Bytes(buffer, index) {
@@ -37,8 +46,10 @@ export function encode(ui8a) {
 
     return res.join("");
 }
-
-export function decode(base85) {
+/** @param {String} base85
+ *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
+export function decode(base85, charset) {
+    const chars = getMap(charset);
     const ints = [];
     let i = 0;
     for (; i < base85.length / 5  - 1; i++) {
