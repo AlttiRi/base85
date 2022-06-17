@@ -2,11 +2,11 @@ const chars = `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\
 
 /** @param {Uint8Array} ui8a */
 export function encode(ui8a) {
-    let res = [];
+    const res = [];
 
     function encode4Bytes(buffer, index) {
         let num = new DataView(buffer).getUint32(4 * index);
-        let x = [];
+        const x = [];
         for (let i = 0; i < 5; i++) {
             x.unshift(num % 85);
             num = Math.trunc(num / 85);
