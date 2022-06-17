@@ -16,9 +16,9 @@ export function encode(ui8a, charset) {
     const dw = new DataView(ui8a.buffer);
     function encode4Bytes(index) {
         let num = dw.getUint32(4 * index);
-        const x = [];
+        const x = new Array(5);
         for (let i = 0; i < 5; i++) {
-            x.unshift(num % 85);
+            x[4 - i] = num % 85;
             num = Math.trunc(num / 85);
         }
         res.push(x.map(num => chars.charAt(num)).join(""));
