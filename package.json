@@ -2,6 +2,7 @@
   "name": "base85",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "keywords": ["base85"],
   "author": "Alt'tiRi",
