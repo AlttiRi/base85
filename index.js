@@ -13,8 +13,9 @@ export function encode(ui8a, charset) {
     const chars = getMap(charset);
     const res = [];
 
-    function encode4Bytes(buffer, index) {
-        let num = new DataView(buffer).getUint32(4 * index);
+    const dw = new DataView(ui8a.buffer);
+    function encode4Bytes(index) {
+        let num = dw.getUint32(4 * index);
         const x = [];
         for (let i = 0; i < 5; i++) {
             x.unshift(num % 85);
@@ -27,8 +28,9 @@ export function encode(ui8a, charset) {
     console.log("pad", pad);
 
     let i = 0;
-    for (; i < ui8a.length / 4 - (pad === 4 ? 0 : 1); i++) {
-        encode4Bytes(ui8a.buffer, i);
+    const to = ui8a.length / 4 - (pad === 4 ? 0 : 1);
+    for (; i < to; i++) {
+        encode4Bytes(i);
     }
 
     if (pad && pad !== 4) {
