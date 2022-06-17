@@ -1,0 +1,9 @@
+{
+  "name": "base85",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": ["base85"],
+  "author": "Alt'tiRi",
+  "license": "MIT"
+}
