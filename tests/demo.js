@@ -36,3 +36,13 @@ console.log(wikiTextAb.toString() === decode(encodedWikiText).toString());
 // true
 
 
+const long = "a".repeat(1_000_002);
+const longAb = new TextEncoder().encode(long);
+console.time("endDec");
+const endDec = decode(encode(longAb));
+// btoa(atob(long));
+console.timeEnd("endDec");
+console.log("[enc-dec][long]", longAb.toString() === endDec.toString());
+// true
+
+
