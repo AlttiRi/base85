@@ -23,7 +23,8 @@ export function encode(ui8a, charset) {
             group5[4 - i] = num % 85;
             num = Math.trunc(num / 85);
         }
-        res.push(group5.map(num => chars.charAt(num)).join(""));
+        const group = group5.map(num => chars.charAt(num)).join("");
+        res.push(group);
     }
 
     const pad = 4 - ui8a.byteLength % 4;
