@@ -12,36 +12,44 @@ function getMap(charset) {
 export function encode(ui8a, charset) {
     console.time("encode");
     const chars = getMap(charset);
-    const res = [];
-    
-    const dataW  = new DataView(ui8a.buffer);
-    const group5 = new Array(5);
-    function getGroupString(index, dw = dataW) {
+    const res = new Array(Math.ceil(ui8a.length*5/4));
+
+    let dw = new DataView(ui8a.buffer);
+
+    function getGroupString(index) {
         let num = dw.getUint32(4 * index);
         for (let i = 0; i < 5; i++) {
-            group5[4 - i] = num % 85;
+            const k = index*5 + 4 - i;
+            res[k] = chars.charAt(num % 85);
             num = Math.trunc(num / 85);
         }
-        return group5.map(num => chars.charAt(num)).join("");
+    }
+    const to = Math.trunc(ui8a.length / 4);
+    for (let i = 0; i < to; i++) {
+        getGroupString(i);
     }
 
-    const pad = 4 - ui8a.byteLength % 4;
-    // console.log("pad", pad);
+    const zeroPadLength = (4 - (ui8a.length % 4)) % 4;
+    let last = [];
+    if (zeroPadLength) {
+        const lastPartIndex = Math.trunc(ui8a.length / 4) * 4;
+        dw = new DataView(Uint8Array.from([...ui8a.slice(lastPartIndex), 0,0,0]).buffer);
 
-    let i = 0;
-    const to = ui8a.length / 4 - (pad === 4 ? 0 : 1);
-    for (; i < to; i++) {
-        res.push(getGroupString(i));
+        let num = dw.getUint32(0);
+        const x = new Array(5);
+        for (let i = 0; i < 5; i++) {
+            x[4 - i] = chars.charAt(num % 85);
+            num = Math.trunc(num / 85);
+        }
+        console.log(last = x.slice(0, 5 - zeroPadLength));
+    } else {
+        console.log(res);
     }
-    if (pad && pad !== 4) {
-        const lastUi8aPart = Uint8Array.from([...ui8a.slice(4 * i), 0, 0, 0]);
-        const dw = new DataView(lastUi8aPart.buffer);
-        res.push(getGroupString(0, dw).slice(0, -pad));
-    }
+
     console.timeEnd("encode");
 
     console.time("join");
-    const result = res.join("");
+    const result = res.join("") + last.join("");
     console.timeEnd("join");
 
     return result;
