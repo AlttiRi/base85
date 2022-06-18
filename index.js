@@ -16,17 +16,14 @@ export function encode(ui8a, charset) {
     const last5Length = remain ? remain + 1 : 0;
     const res = new Array(Math.ceil(ui8a.length*5/4) + last5Length);
 
-    let dw = new DataView(ui8a.buffer);
-    function getGroupString(index) {
-        let num = dw.getUint32(4 * index);
-        for (let i = 0; i < 5; i++) {
-            res[4 - i + index*5] = chars.charAt(num % 85);
-            num = Math.trunc(num / 85);
-        }
-    }
+    const dw = new DataView(ui8a.buffer);
     const to = Math.trunc(ui8a.length / 4);
     for (let i = 0; i < to; i++) {
-        getGroupString(i);
+        let num = dw.getUint32(4 * i);
+        for (let k = 0; k < 5; k++) {
+            res[4 - k + i*5] = chars.charAt(num % 85);
+            num = Math.trunc(num / 85);
+        }
     }
 
     if (remain) {
