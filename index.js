@@ -59,13 +59,13 @@ export function encode(ui8a, charset) {
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
 export function decode(_base85, charset) {
     console.time("decode");
-    // console.time("m");
+    console.time("m");
     const map = getMap(charset);
     const charMap = new Map();
     for (const [num, charCode] of Object.entries(map)) {
         charMap.set(charCode, parseInt(num));
     }
-    // console.timeEnd("m");
+    console.timeEnd("m");
 
     const pow2 = 85 * 85;
     const pow3 = 85 * 85 * 85;
@@ -73,10 +73,10 @@ export function decode(_base85, charset) {
 
     const base85 = new TextEncoder().encode(_base85);
 
-    const ints = new Uint8Array((Math.ceil(base85.length/5) * 4));
+    const ints = new Uint8Array((Math.ceil(base85.length / 5) * 4));
     const dw = new DataView(ints.buffer);
     let i = 0;
-    for (; i < base85.length / 5  - 1; i++) {
+    for (; i < base85.length / 5 - 1; i++) {
         const c1 = charMap.get(base85[i*5 + 4]);
         const c2 = charMap.get(base85[i*5 + 3]) * 85;
         const c3 = charMap.get(base85[i*5 + 2]) * pow2;
@@ -97,9 +97,9 @@ export function decode(_base85, charset) {
 
     console.timeEnd("decode");
 
-    // console.time("end");
+    console.time("end");
     const res = new Uint8Array(ints.slice(0, ints.byteLength - pad));
-    // console.timeEnd("end");
+    console.timeEnd("end");
 
     return res;
 }
