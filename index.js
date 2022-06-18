@@ -29,25 +29,26 @@ export function encode(ui8a, charset) {
         getGroupString(i);
     }
 
-    let last = [];
     if (remain) {
         const lastPartIndex = Math.trunc(ui8a.length / 4) * 4;
         const lastPart = Uint8Array.from([...ui8a.slice(lastPartIndex), 0, 0, 0]);
-        dw = new DataView(lastPart.buffer);
-
+        const offset = res.length - last5Length - 1;
+        const dw = new DataView(lastPart.buffer);
         let num = dw.getUint32(0);
-        const temp = new Array(5);
-        for (let i = 0; i < 5; i++) {
-            temp[4 - i] = chars.charAt(num % 85);
+        for (let i = 4; i >= 0; i--) {
+            const value = chars.charAt(num % 85);
             num = Math.trunc(num / 85);
+            if (i < last5Length) {
+                const index = offset + i;
+                res[index] = value;
+            }
         }
-        last = temp.slice(0, last5Length);
     }
 
     console.timeEnd("encode");
 
     console.time("join");
-    const result = res.join("") + last.join("");
+    const result = res.join("")
     console.timeEnd("join");
 
     return result;
