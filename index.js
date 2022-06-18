@@ -91,8 +91,8 @@ export function decode(base85, charset) {
     const base85ab = new TextEncoder().encode(base85);
     const pad = (5 - (base85ab.length % 5)) % 5;
 
-    const ints = new Uint8Array((Math.ceil(base85ab.length / 5) * 4));
-    const dw = new DataView(ints.buffer);
+    const ints = new Uint8Array((Math.ceil(base85ab.length / 5) * 4) - pad);
+    let dw = new DataView(ints.buffer);
     let i = 0;
     for (; i < base85ab.length / 5 - 1; i++) {
         const c1 = revMap[base85ab[i*5 + 4]];
@@ -105,18 +105,17 @@ export function decode(base85, charset) {
 
     const lch = mapOrig[mapOrig.length - 1];
     const lastPart = new Uint8Array([...base85ab.slice(i * 5), lch, lch, lch]);
+    dw = new DataView(lastPart.buffer);
     const c1 = revMap[lastPart[4]];
     const c2 = revMap[lastPart[3]] * 85;
     const c3 = revMap[lastPart[2]] * pow2;
     const c4 = revMap[lastPart[1]] * pow3;
     const c5 = revMap[lastPart[0]] * pow4;
-    dw.setUint32(i * 4, c1+c2+c3+c4+c5);
+    dw.setUint32(0, c1+c2+c3+c4+c5);
+    for (let j = 0; j < 4 - pad; j++) {
+        ints[i*4 + j] = lastPart[j];
+    }
 
     console.timeEnd("decode");
-
-    console.time("end");
-    const res = new Uint8Array(ints.slice(0, ints.byteLength - pad));
-    console.timeEnd("end");
-
-    return res;
+    return ints;
 }
