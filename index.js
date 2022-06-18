@@ -10,7 +10,7 @@ function getMap(charset) {
 /** @param {Uint8Array} ui8a
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"] */
 export function encode(ui8a, charset) {
-    console.time("xxx");
+    console.time("encode");
     const chars = getMap(charset);
     const res = [];
 
@@ -34,7 +34,6 @@ export function encode(ui8a, charset) {
     for (; i < to; i++) {
         encode4Bytes(i);
     }
-    console.timeEnd("xxx");
     if (pad && pad !== 4) {
         const lastUi8aPart = Uint8Array.from([...ui8a.slice(4 * i), 0, 0, 0]);
         const dw = new DataView(lastUi8aPart.buffer);
@@ -47,8 +46,12 @@ export function encode(ui8a, charset) {
         const last = x.map(num => chars.charAt(num)).join("");
         res.push(last.slice(0, -pad));
     }
+    console.timeEnd("encode");
+    console.time("join");
+    const result = res.join("");
+    console.timeEnd("join");
 
-    return res.join("");
+    return result;
 }
 /** @param {String} base85
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
