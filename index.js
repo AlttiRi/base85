@@ -14,7 +14,7 @@ export function encode(ui8a, charset) {
     const chars = getMap(charset);
     const remain = ui8a.length % 4;
     const last5Length = remain ? remain + 1 : 0;
-    const res = new Array(Math.ceil(ui8a.length*5/4) + last5Length);
+    const res = new Array(Math.ceil(ui8a.length * 5/4) + last5Length);
 
     const dw = new DataView(ui8a.buffer);
     const to = Math.trunc(ui8a.length / 4);
