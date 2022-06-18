@@ -9,9 +9,13 @@ const pow4 = 85 * 85 * 85 * 85;
  *  @return {Uint8Array}  */
 function getMap(charset = "ascii58") {
     if (charset === "z85") {return z85;}
-    if (charset?.length && charset.length !== 85) {return ascii58;}
-    return charsetToMap(charset);
+    if (charset?.length === 85) {
+        return charsetToMap(charset);
+    }
+    return ascii58;
 }
+
+/** @param {String} charset - 85 characters ASCII string */
 function charsetToMap(charset) {
     const ui8a = new Uint8Array(85);
     for (let i = 0; i < 85; i++) {
@@ -36,7 +40,6 @@ function getReverseMap(mapOrig) {
  * @return {String}
  * */
 export function encode(ui8a, charset) {
-    console.time("encode");
     const charMap = getMap(charset);
     const remain = ui8a.length % 4;
     const last5Length = remain ? remain + 1 : 0;
@@ -68,13 +71,8 @@ export function encode(ui8a, charset) {
             }
         }
     }
-    console.timeEnd("encode");
 
-    console.time("join");
-    const result = new TextDecoder().decode(target);
-    console.timeEnd("join");
-
-    return result;
+    return new TextDecoder().decode(target);
 }
 
 /**
@@ -84,9 +82,8 @@ export function encode(ui8a, charset) {
  * @return {Uint8Array}
  * */
 export function decode(base85, charset) {
-    console.time("decode");
-    const mapOrig = getMap(charset);
-    const revMap  = getReverseMap(mapOrig);
+    const map = getMap(charset);
+    const revMap  = getReverseMap(map);
 
     const base85ab = new TextEncoder().encode(base85);
     const pad = (5 - (base85ab.length % 5)) % 5;
@@ -103,7 +100,7 @@ export function decode(base85, charset) {
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
-    const lch = mapOrig[mapOrig.length - 1];
+    const lch = map[map.length - 1];
     const lastPart = new Uint8Array([...base85ab.slice(i * 5), lch, lch, lch]);
     dw = new DataView(lastPart.buffer);
     const c1 = revMap[lastPart[4]];
@@ -116,6 +113,5 @@ export function decode(base85, charset) {
         ints[i*4 + j] = lastPart[j];
     }
 
-    console.timeEnd("decode");
     return ints;
 }
