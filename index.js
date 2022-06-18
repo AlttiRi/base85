@@ -1,5 +1,5 @@
-const ascii58 = `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`;
-const z85     = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`;
+const ascii58 = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
+const z85     = charsetToMap(`0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`);
 
 const pow2 = 85 * 85;
 const pow3 = 85 * 85 * 85;
@@ -7,10 +7,12 @@ const pow4 = 85 * 85 * 85 * 85;
 
 /** @param {"ascii58"|"z85"|String} charset
  *  @return {Uint8Array}  */
-function getMap(charset = ascii58) {
-    if (charset === "z85") {charset = z85;}
-    if (charset?.length && charset.length !== 85) {charset = ascii58;}
-
+function getMap(charset = "ascii58") {
+    if (charset === "z85") {return z85;}
+    if (charset?.length && charset.length !== 85) {return ascii58;}
+    return charsetToMap(charset);
+}
+function charsetToMap(charset) {
     const ui8a = new Uint8Array(85);
     for (let i = 0; i < 85; i++) {
         ui8a[i] = charset.charAt(i).charCodeAt(0);
@@ -83,11 +85,8 @@ export function encode(ui8a, charset) {
  * */
 export function decode(base85, charset) {
     console.time("decode");
-    console.time("m");
     const mapOrig = getMap(charset);
     const revMap  = getReverseMap(mapOrig);
-
-    console.timeEnd("m");
 
     const base85ab = new TextEncoder().encode(base85);
 
