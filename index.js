@@ -100,8 +100,8 @@ export function decode(base85, charset) {
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
-    const lch = map[map.length - 1];
-    const lastPart = new Uint8Array([...base85ab.slice(i * 5), lch, lch, lch]);
+    const lCh = map[map.length - 1];
+    const lastPart = new Uint8Array([...base85ab.slice(i * 5), lCh, lCh, lCh, lCh]);
     dw = new DataView(lastPart.buffer);
     const c1 = revMap[lastPart[4]];
     const c2 = revMap[lastPart[3]] * 85;
