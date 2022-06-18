@@ -29,11 +29,11 @@ export function encode(ui8a, charset) {
         getGroupString(i);
     }
 
-    const zeroPadLength = (4 - (ui8a.length % 4)) % 4;
+    const remain = ui8a.length % 4;
     let last = [];
-    if (zeroPadLength) {
+    if (remain) {
         const lastPartIndex = Math.trunc(ui8a.length / 4) * 4;
-        dw = new DataView(Uint8Array.from([...ui8a.slice(lastPartIndex), 0,0,0]).buffer);
+        dw = new DataView(Uint8Array.from([...ui8a.slice(lastPartIndex), 0, 0, 0]).buffer);
 
         let num = dw.getUint32(0);
         const x = new Array(5);
@@ -41,7 +41,7 @@ export function encode(ui8a, charset) {
             x[4 - i] = chars.charAt(num % 85);
             num = Math.trunc(num / 85);
         }
-        console.log(last = x.slice(0, 5 - zeroPadLength));
+        console.log(last = x.slice(0, remain + 1));
     } else {
         console.log(res);
     }
