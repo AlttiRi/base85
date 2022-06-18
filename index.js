@@ -1,10 +1,15 @@
 const ascii58 = `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`;
 const z85     = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`;
 
-function getMap(charset) {
-    if (charset === "z85")      {return z85;}
-    if (charset?.length === 85) {return charset;}
-    return ascii58;
+function getMap(charset = ascii58) {
+    if (charset === "z85") {charset = z85;}
+    if (charset?.length && charset.length !== 85) {charset = ascii58;}
+
+    const ui8a = new Uint8Array(85);
+    for (let i = 0; i < ascii58.length; i++) {
+        ui8a[i] = charset.charAt(i).charCodeAt(0);
+    }
+    return ui8a;
 }
 
 /** @param {Uint8Array} ui8a
@@ -14,14 +19,15 @@ export function encode(ui8a, charset) {
     const chars = getMap(charset);
     const remain = ui8a.length % 4;
     const last5Length = remain ? remain + 1 : 0;
-    const res = new Array(Math.ceil(ui8a.length * 5/4) + last5Length);
+    const length = Math.ceil(ui8a.length * 5/4);
+    const target = new Uint8Array(length);
 
     const dw = new DataView(ui8a.buffer);
     const to = Math.trunc(ui8a.length / 4);
     for (let i = 0; i < to; i++) {
         let num = dw.getUint32(4 * i);
-        for (let k = 0; k < 5; k++) {
-            res[4 - k + i*5] = chars.charAt(num % 85);
+        for (let k = 4; k >= 0; k--) {
+            target[k + i*5] = chars[num % 85];
             num = Math.trunc(num / 85);
         }
     }
@@ -29,23 +35,22 @@ export function encode(ui8a, charset) {
     if (remain) {
         const lastPartIndex = Math.trunc(ui8a.length / 4) * 4;
         const lastPart = Uint8Array.from([...ui8a.slice(lastPartIndex), 0, 0, 0]);
-        const offset = res.length - last5Length - 1;
+        const offset = target.length - last5Length - 1;
         const dw = new DataView(lastPart.buffer);
         let num = dw.getUint32(0);
         for (let i = 4; i >= 0; i--) {
-            const value = chars.charAt(num % 85);
+            const value = chars[num % 85];
             num = Math.trunc(num / 85);
             if (i < last5Length) {
-                const index = offset + i;
-                res[index] = value;
+                const index = offset + i + 1;
+                target[index] = value;
             }
         }
     }
-
     console.timeEnd("encode");
 
     console.time("join");
-    const result = res.join("")
+    const result = new TextDecoder().decode(target);
     console.timeEnd("join");
 
     return result;
