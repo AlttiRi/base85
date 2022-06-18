@@ -59,26 +59,27 @@ export function encode(ui8a, charset) {
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
 export function decode(base85, charset) {
     console.time("decode");
-    const chars = getMap(charset);
+    const chars = new TextDecoder().decode(getMap(charset));
+
     const ints = new Uint8Array((Math.ceil(base85.length/5) * 4));
     let dw = new DataView(ints.buffer);
     let i = 0;
     for (; i < base85.length / 5  - 1; i++) {
-        const c1 = chars.indexOf(base85[i*5 + 4].charCodeAt(0));
-        const c2 = chars.indexOf(base85[i*5 + 3].charCodeAt(0)) * 85;
-        const c3 = chars.indexOf(base85[i*5 + 2].charCodeAt(0)) * 85 * 85;
-        const c4 = chars.indexOf(base85[i*5 + 1].charCodeAt(0)) * 85 * 85 * 85;
-        const c5 = chars.indexOf(base85[i*5    ].charCodeAt(0)) * 85 * 85 * 85 * 85;
+        const c1 = chars.indexOf(base85[i*5 + 4]);
+        const c2 = chars.indexOf(base85[i*5 + 3]) * 85;
+        const c3 = chars.indexOf(base85[i*5 + 2]) * 85 * 85;
+        const c4 = chars.indexOf(base85[i*5 + 1]) * 85 * 85 * 85;
+        const c5 = chars.indexOf(base85[i*5    ]) * 85 * 85 * 85 * 85;
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
     const pad = (5 - (base85.length % 5)) % 5;
-    let lastPart = base85.slice(i * 5).padEnd(5, String.fromCharCode(chars[chars.length - 1]));
-    const c1 = chars.indexOf(lastPart[4].charCodeAt(0));
-    const c2 = chars.indexOf(lastPart[3].charCodeAt(0)) * 85;
-    const c3 = chars.indexOf(lastPart[2].charCodeAt(0)) * 85 * 85;
-    const c4 = chars.indexOf(lastPart[1].charCodeAt(0)) * 85 * 85 * 85;
-    const c5 = chars.indexOf(lastPart[0].charCodeAt(0)) * 85 * 85 * 85 * 85;
+    let lastPart = base85.slice(i * 5).padEnd(5, chars[chars.length - 1]);
+    const c1 = chars.indexOf(lastPart[4]);
+    const c2 = chars.indexOf(lastPart[3]) * 85;
+    const c3 = chars.indexOf(lastPart[2]) * 85 * 85;
+    const c4 = chars.indexOf(lastPart[1]) * 85 * 85 * 85;
+    const c5 = chars.indexOf(lastPart[0]) * 85 * 85 * 85 * 85;
     dw.setUint32(i * 4, c1+c2+c3+c4+c5);
 
     console.timeEnd("decode");
@@ -86,6 +87,6 @@ export function decode(base85, charset) {
     console.time("end");
     const res = new Uint8Array(ints.slice(0, ints.byteLength - pad));
     console.timeEnd("end");
-    
+
     return res;
 }
