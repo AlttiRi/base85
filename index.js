@@ -16,7 +16,7 @@ function getMap(charset = ascii58) {
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"] */
 export function encode(ui8a, charset) {
     console.time("encode");
-    const chars = getMap(charset);
+    const charMap = getMap(charset);
     const remain = ui8a.length % 4;
     const last5Length = remain ? remain + 1 : 0;
     const length = Math.ceil(ui8a.length * 5/4);
@@ -27,7 +27,7 @@ export function encode(ui8a, charset) {
     for (let i = 0; i < to; i++) {
         let num = dw.getUint32(4 * i);
         for (let k = 4; k >= 0; k--) {
-            target[k + i*5] = chars[num % 85];
+            target[k + i*5] = charMap[num % 85];
             num = Math.trunc(num / 85);
         }
     }
@@ -39,7 +39,7 @@ export function encode(ui8a, charset) {
         const dw = new DataView(lastPart.buffer);
         let num = dw.getUint32(0);
         for (let i = 4; i >= 0; i--) {
-            const value = chars[num % 85];
+            const value = charMap[num % 85];
             num = Math.trunc(num / 85);
             if (i < last5Length) {
                 const index = offset + i + 1;
@@ -59,27 +59,27 @@ export function encode(ui8a, charset) {
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
 export function decode(base85, charset) {
     console.time("decode");
-    const chars = new TextDecoder().decode(getMap(charset));
+    const charMap = new TextDecoder().decode(getMap(charset));
 
     const ints = new Uint8Array((Math.ceil(base85.length/5) * 4));
     let dw = new DataView(ints.buffer);
     let i = 0;
     for (; i < base85.length / 5  - 1; i++) {
-        const c1 = chars.indexOf(base85[i*5 + 4]);
-        const c2 = chars.indexOf(base85[i*5 + 3]) * 85;
-        const c3 = chars.indexOf(base85[i*5 + 2]) * 85 * 85;
-        const c4 = chars.indexOf(base85[i*5 + 1]) * 85 * 85 * 85;
-        const c5 = chars.indexOf(base85[i*5    ]) * 85 * 85 * 85 * 85;
+        const c1 = charMap.indexOf(base85[i*5 + 4]);
+        const c2 = charMap.indexOf(base85[i*5 + 3]) * 85;
+        const c3 = charMap.indexOf(base85[i*5 + 2]) * 85 * 85;
+        const c4 = charMap.indexOf(base85[i*5 + 1]) * 85 * 85 * 85;
+        const c5 = charMap.indexOf(base85[i*5    ]) * 85 * 85 * 85 * 85;
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
     const pad = (5 - (base85.length % 5)) % 5;
-    let lastPart = base85.slice(i * 5).padEnd(5, chars[chars.length - 1]);
-    const c1 = chars.indexOf(lastPart[4]);
-    const c2 = chars.indexOf(lastPart[3]) * 85;
-    const c3 = chars.indexOf(lastPart[2]) * 85 * 85;
-    const c4 = chars.indexOf(lastPart[1]) * 85 * 85 * 85;
-    const c5 = chars.indexOf(lastPart[0]) * 85 * 85 * 85 * 85;
+    let lastPart = base85.slice(i * 5).padEnd(5, charMap[charMap.length - 1]);
+    const c1 = charMap.indexOf(lastPart[4]);
+    const c2 = charMap.indexOf(lastPart[3]) * 85;
+    const c3 = charMap.indexOf(lastPart[2]) * 85 * 85;
+    const c4 = charMap.indexOf(lastPart[1]) * 85 * 85 * 85;
+    const c5 = charMap.indexOf(lastPart[0]) * 85 * 85 * 85 * 85;
     dw.setUint32(i * 4, c1+c2+c3+c4+c5);
 
     console.timeEnd("decode");
