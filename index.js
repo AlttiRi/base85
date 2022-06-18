@@ -12,8 +12,12 @@ function getMap(charset = ascii58) {
     return ui8a;
 }
 
-/** @param {Uint8Array} ui8a
- *  @param {"ascii58"|"z85"|String} [charset="ascii58"] */
+/**
+ * Returns Base85 string.
+ * @param {Uint8Array} ui8a
+ * @param {"ascii58"|"z85"|String} [charset="ascii58"]
+ * @return {String}
+ * */
 export function encode(ui8a, charset) {
     console.time("encode");
     const charMap = getMap(charset);
@@ -55,21 +59,27 @@ export function encode(ui8a, charset) {
 
     return result;
 }
-/** @param {String} _base85
- *  @param {"ascii58"|"z85"|String} [charset="ascii58"]  */
+
+const pow2 = 85 * 85;
+const pow3 = 85 * 85 * 85;
+const pow4 = 85 * 85 * 85 * 85;
+
+/**
+ * Decodes Base85 string.
+ * @param {String} _base85
+ * @param {"ascii58"|"z85"|String} [charset="ascii58"]
+ * @return {Uint8Array}
+ * */
 export function decode(_base85, charset) {
     console.time("decode");
     console.time("m");
-    const map = getMap(charset);
-    const charMap = new Map();
-    for (const [num, charCode] of Object.entries(map)) {
-        charMap.set(charCode, parseInt(num));
+    const mapOrig = getMap(charset);
+    const revMap = new Uint8Array(128);
+
+    for (const [num, charCode] of Object.entries(mapOrig)) {
+        revMap[charCode] = parseInt(num);
     }
     console.timeEnd("m");
-
-    const pow2 = 85 * 85;
-    const pow3 = 85 * 85 * 85;
-    const pow4 = 85 * 85 * 85 * 85;
 
     const base85 = new TextEncoder().encode(_base85);
 
@@ -77,22 +87,22 @@ export function decode(_base85, charset) {
     const dw = new DataView(ints.buffer);
     let i = 0;
     for (; i < base85.length / 5 - 1; i++) {
-        const c1 = charMap.get(base85[i*5 + 4]);
-        const c2 = charMap.get(base85[i*5 + 3]) * 85;
-        const c3 = charMap.get(base85[i*5 + 2]) * pow2;
-        const c4 = charMap.get(base85[i*5 + 1]) * pow3;
-        const c5 = charMap.get(base85[i*5    ]) * pow4;
+        const c1 = revMap[base85[i*5 + 4]];
+        const c2 = revMap[base85[i*5 + 3]] * 85;
+        const c3 = revMap[base85[i*5 + 2]] * pow2;
+        const c4 = revMap[base85[i*5 + 1]] * pow3;
+        const c5 = revMap[base85[i*5    ]] * pow4;
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
     const pad = (5 - (base85.length % 5)) % 5;
-    const lch = map[map.length - 1];
+    const lch = mapOrig[mapOrig.length - 1];
     const lastPart = new Uint8Array([...base85.slice(i * 5), lch, lch, lch]);
-    const c1 = charMap.get(lastPart[4]);
-    const c2 = charMap.get(lastPart[3]) * 85;
-    const c3 = charMap.get(lastPart[2]) * pow2;
-    const c4 = charMap.get(lastPart[1]) * pow3;
-    const c5 = charMap.get(lastPart[0]) * pow4;
+    const c1 = revMap[lastPart[4]];
+    const c2 = revMap[lastPart[3]] * 85;
+    const c3 = revMap[lastPart[2]] * pow2;
+    const c4 = revMap[lastPart[1]] * pow3;
+    const c5 = revMap[lastPart[0]] * pow4;
     dw.setUint32(i * 4, c1+c2+c3+c4+c5);
 
     console.timeEnd("decode");
