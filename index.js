@@ -89,6 +89,7 @@ export function decode(base85, charset) {
     const revMap  = getReverseMap(mapOrig);
 
     const base85ab = new TextEncoder().encode(base85);
+    const pad = (5 - (base85ab.length % 5)) % 5;
 
     const ints = new Uint8Array((Math.ceil(base85ab.length / 5) * 4));
     const dw = new DataView(ints.buffer);
@@ -102,7 +103,6 @@ export function decode(base85, charset) {
         dw.setUint32(i * 4, c1+c2+c3+c4+c5);
     }
 
-    const pad = (5 - (base85ab.length % 5)) % 5;
     const lch = mapOrig[mapOrig.length - 1];
     const lastPart = new Uint8Array([...base85ab.slice(i * 5), lch, lch, lch]);
     const c1 = revMap[lastPart[4]];
