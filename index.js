@@ -6,7 +6,7 @@ function getMap(charset = ascii58) {
     if (charset?.length && charset.length !== 85) {charset = ascii58;}
 
     const ui8a = new Uint8Array(85);
-    for (let i = 0; i < ascii58.length; i++) {
+    for (let i = 0; i < 85; i++) {
         ui8a[i] = charset.charAt(i).charCodeAt(0);
     }
     return ui8a;
