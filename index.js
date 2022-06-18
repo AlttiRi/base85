@@ -10,6 +10,7 @@ function getMap(charset) {
 /** @param {Uint8Array} ui8a
  *  @param {"ascii58"|"z85"|String} [charset="ascii58"] */
 export function encode(ui8a, charset) {
+    console.time("xxx");
     const chars = getMap(charset);
     const res = [];
 
@@ -26,25 +27,25 @@ export function encode(ui8a, charset) {
     }
 
     const pad = 4 - ui8a.byteLength % 4;
-    console.log("pad", pad);
+    // console.log("pad", pad);
 
     let i = 0;
     const to = ui8a.length / 4 - (pad === 4 ? 0 : 1);
     for (; i < to; i++) {
         encode4Bytes(i);
     }
-
+    console.timeEnd("xxx");
     if (pad && pad !== 4) {
-        const zeros = "0".repeat(pad).split("").map(ch => parseInt(ch));
-        const lastUi8aPart = Uint8Array.from([...ui8a.slice(4 * i), ...zeros]);
-        encode4Bytes(lastUi8aPart.buffer, 0);
+        const lastUi8aPart = Uint8Array.from([...ui8a.slice(4 * i), 0, 0, 0]);
+        const dw = new DataView(lastUi8aPart.buffer);
 
-        const last = res[res.length - 1];
-        let charsToRemove;
-        if (pad === 1) {charsToRemove = 1}
-        if (pad === 2) {charsToRemove = 2}
-        if (pad === 3) {charsToRemove = 3}
-        res[res.length - 1] = last.slice(0, -charsToRemove);
+        let num = dw.getUint32(0);
+        for (let i = 0; i < 5; i++) {
+            x[4 - i] = num % 85;
+            num = Math.trunc(num / 85);
+        }
+        const last = x.map(num => chars.charAt(num)).join("");
+        res.push(last.slice(0, -pad));
     }
 
     return res.join("");
@@ -65,7 +66,7 @@ export function decode(base85, charset) {
     }
 
     const pad = (5 - (base85.length % 5)) % 5;
-    console.log("pad", pad, "length", base85.length);
+    //console.log("pad", pad, "length", base85.length);
     let lastPart = base85.slice(i * 5).padEnd(5, chars[chars.length - 1]);
     const c1 = chars.indexOf(lastPart[4]);
     const c2 = chars.indexOf(lastPart[3]) * 85;
