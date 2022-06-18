@@ -12,15 +12,15 @@ function getMap(charset) {
 export function encode(ui8a, charset) {
     console.time("encode");
     const chars = getMap(charset);
-    const res = new Array(Math.ceil(ui8a.length*5/4));
+    const remain = ui8a.length % 4;
+    const last5Length = remain ? remain + 1 : 0;
+    const res = new Array(Math.ceil(ui8a.length*5/4) + last5Length);
 
     let dw = new DataView(ui8a.buffer);
-
     function getGroupString(index) {
         let num = dw.getUint32(4 * index);
         for (let i = 0; i < 5; i++) {
-            const k = index*5 + 4 - i;
-            res[k] = chars.charAt(num % 85);
+            res[4 - i + index*5] = chars.charAt(num % 85);
             num = Math.trunc(num / 85);
         }
     }
@@ -29,21 +29,19 @@ export function encode(ui8a, charset) {
         getGroupString(i);
     }
 
-    const remain = ui8a.length % 4;
     let last = [];
     if (remain) {
         const lastPartIndex = Math.trunc(ui8a.length / 4) * 4;
-        dw = new DataView(Uint8Array.from([...ui8a.slice(lastPartIndex), 0, 0, 0]).buffer);
+        const lastPart = Uint8Array.from([...ui8a.slice(lastPartIndex), 0, 0, 0]);
+        dw = new DataView(lastPart.buffer);
 
         let num = dw.getUint32(0);
-        const x = new Array(5);
+        const temp = new Array(5);
         for (let i = 0; i < 5; i++) {
-            x[4 - i] = chars.charAt(num % 85);
+            temp[4 - i] = chars.charAt(num % 85);
             num = Math.trunc(num / 85);
         }
-        console.log(last = x.slice(0, remain + 1));
-    } else {
-        console.log(res);
+        last = temp.slice(0, last5Length);
     }
 
     console.timeEnd("encode");
