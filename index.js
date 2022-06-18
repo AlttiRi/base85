@@ -13,17 +13,17 @@ export function encode(ui8a, charset) {
     console.time("encode");
     const chars = getMap(charset);
     const res = [];
+    const group5 = new Array(5);
 
     const dw = new DataView(ui8a.buffer);
-    const x = new Array(5);
     function encode4Bytes(index) {
         let num = dw.getUint32(4 * index);
 
         for (let i = 0; i < 5; i++) {
-            x[4 - i] = num % 85;
+            group5[4 - i] = num % 85;
             num = Math.trunc(num / 85);
         }
-        res.push(x.map(num => chars.charAt(num)).join(""));
+        res.push(group5.map(num => chars.charAt(num)).join(""));
     }
 
     const pad = 4 - ui8a.byteLength % 4;
@@ -40,13 +40,14 @@ export function encode(ui8a, charset) {
 
         let num = dw.getUint32(0);
         for (let i = 0; i < 5; i++) {
-            x[4 - i] = num % 85;
+            group5[4 - i] = num % 85;
             num = Math.trunc(num / 85);
         }
-        const last = x.map(num => chars.charAt(num)).join("");
+        const last = group5.map(num => chars.charAt(num)).join("");
         res.push(last.slice(0, -pad));
     }
     console.timeEnd("encode");
+
     console.time("join");
     const result = res.join("");
     console.timeEnd("join");
