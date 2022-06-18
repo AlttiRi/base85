@@ -13,18 +13,16 @@ export function encode(ui8a, charset) {
     console.time("encode");
     const chars = getMap(charset);
     const res = [];
+    
+    const dataW  = new DataView(ui8a.buffer);
     const group5 = new Array(5);
-
-    const dw = new DataView(ui8a.buffer);
-    function encode4Bytes(index) {
+    function getGroupString(index, dw = dataW) {
         let num = dw.getUint32(4 * index);
-
         for (let i = 0; i < 5; i++) {
             group5[4 - i] = num % 85;
             num = Math.trunc(num / 85);
         }
-        const group = group5.map(num => chars.charAt(num)).join("");
-        res.push(group);
+        return group5.map(num => chars.charAt(num)).join("");
     }
 
     const pad = 4 - ui8a.byteLength % 4;
@@ -33,19 +31,12 @@ export function encode(ui8a, charset) {
     let i = 0;
     const to = ui8a.length / 4 - (pad === 4 ? 0 : 1);
     for (; i < to; i++) {
-        encode4Bytes(i);
+        res.push(getGroupString(i));
     }
     if (pad && pad !== 4) {
         const lastUi8aPart = Uint8Array.from([...ui8a.slice(4 * i), 0, 0, 0]);
         const dw = new DataView(lastUi8aPart.buffer);
-
-        let num = dw.getUint32(0);
-        for (let i = 0; i < 5; i++) {
-            group5[4 - i] = num % 85;
-            num = Math.trunc(num / 85);
-        }
-        const last = group5.map(num => chars.charAt(num)).join("");
-        res.push(last.slice(0, -pad));
+        res.push(getGroupString(0, dw).slice(0, -pad));
     }
     console.timeEnd("encode");
 
