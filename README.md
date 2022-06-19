@@ -31,7 +31,7 @@ console.log(base85.length);
 
 ---
 
-If you need to encode a text _(are you really need it?)_ [use `TextDecoder`/`TextEncoder`](https://github.com/AlttiRi/base85/blob/1b04256730cbbedcb6dbbd7e14fe4a6ac7575ce2/tests/util.js#L17-L29).
+If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`TextDecoder`](https://github.com/AlttiRi/base85/blob/1b04256730cbbedcb6dbbd7e14fe4a6ac7575ce2/tests/util.js#L17-L29).
 
 ```js
 const input = "Man is distinguished";
