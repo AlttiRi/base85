@@ -7,11 +7,11 @@ Aimed to encoding binary data (`Uint8Array`).
 
 ### `function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | String) : String`
 
-`encode` encodes the input `Uint8Array` into base85 `String`.
+[`encode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L42) encodes the input `Uint8Array` into base85 `String`.
 
 ### `function decode(base85: String, charset?: "ascii85" | "z85" | String) : Uint8Array`
 
-`decode` decodes the input base85 `String` into `Uint8Array`.
+[`decode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L84) decodes the input base85 `String` into `Uint8Array`.
 
 `charset` is "z85" by default.
 
