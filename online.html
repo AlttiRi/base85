@@ -25,18 +25,19 @@
     <script type="module">
         import {decode, encode} from "./index.js";
         import * as util from "./tests/util.js";
+        Object.assign(globalThis, util);
         globalThis.decode = decode;
         globalThis.encode = encode;
-        globalThis.base85 = {decode, encode};
+        globalThis.b85 = {decode, encode};
         globalThis.util = util;
-        console.log("base85", globalThis.base85);
+        console.log("b85", globalThis.b85);
     </script>
 </head>
 <body>
     <h2>Base85</h2>
     <span>You can use <pre>encode</pre> and <pre>decode</pre> in the browser's console.</span>
     <br>
-    <i>As well as <pre>base85</pre> and <pre>util</pre>.</i>
+    <i>As well as <pre>b85</pre> and <pre>util</pre>.</i>
     <br>
     <a href="https://github.com/AlttiRi/base85#base85" target="_blank">Readme.md</a>
 </body>
