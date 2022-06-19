@@ -30,8 +30,8 @@ const ascii85_UnicodeMap = [
     ["ABCDEF",   "5sdq,77I"],
     ["ABCDEFG",  "5sdq,77Kc"],
     ["ABCDEFGH", "5sdq,77Kd<"],
-    ["\u0000\u0000\u0000\u0000", "!!!!!"], // "z" not supported
-    ["    ",                     "+<VdL"], // "y" not supported
+    ["\0\0\0\0", "!!!!!"], // "z" not supported
+    ["    ",     "+<VdL"], // "y" not supported
     ["!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
     "+X/-V,pjuf.4Qi!/M8\\10etOA2)[BQ3BB5a4[)(q5sdq,77Kd<8P2WL9hnJ\\;,U=l<E<1'=^#$7?!^lG@:E_WAS,RgBkhF\"D/O92EH6,BF`qtRH$XgbI=;"],
     ["測試中", "k.%MVWM\\adXT"],
@@ -51,8 +51,8 @@ const z85_UnicodeMap = [
     ["ABCDEF",   "k%^}bmmE"],
     ["ABCDEFG",  "k%^}bmmG="],
     ["ABCDEFGH", "k%^}bmmG^r"],
-    ["\u0000\u0000\u0000\u0000", "00000"],
-    ["    ",                     "arR^H"],
+    ["\0\0\0\0", "00000"],
+    ["    ",     "arR^H"],
     ["0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#",
     "fFLssg=mfIi5$zRv}od.xj#0]yIW<9z/xYpB98LFCx!yVk%^}bmmG^rnLhSHo?[FXqbQs(rArg6sZ0BfiX9v1aULrfcoKEudo*88ElY87bl"],
     ["測試中", ">d4IRSIX:^TP"],
