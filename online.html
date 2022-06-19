@@ -26,7 +26,7 @@
         import {decode, encode} from "./index.js";
         import * as util from "./tests/util.js";
         globalThis.decode = decode;
-        globalThis.encode = decode;
+        globalThis.encode = encode;
         globalThis.base85 = {decode, encode};
         globalThis.util = util;
         console.log("base85", globalThis.base85);
