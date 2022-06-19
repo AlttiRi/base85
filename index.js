@@ -5,14 +5,14 @@ const pow2 = 85 * 85;
 const pow3 = 85 * 85 * 85;
 const pow4 = 85 * 85 * 85 * 85;
 
-/** @param {"ascii58"|"z85"|String} charset
+/** @param {"ascii58"|"z85"|String} [charset="z85"]
  *  @return {Uint8Array}  */
-function getMap(charset = "ascii58") {
-    if (charset === "z85") {return z85;}
+function getMap(charset = "z85") {
+    if (charset === "ascii58") {return ascii58;}
     if (charset?.length === 85) {
         return charsetToMap(charset);
     }
-    return ascii58;
+    return z85;
 }
 
 /** @param {String} charset - 85 characters ASCII string */
@@ -36,7 +36,7 @@ function getReverseMap(mapOrig) {
 /**
  * Returns Base85 string.
  * @param {Uint8Array} ui8a
- * @param {"ascii58"|"z85"|String} [charset="ascii58"]
+ * @param {"ascii58"|"z85"|String} [charset="z85"]
  * @return {String}
  * */
 export function encode(ui8a, charset) {
@@ -78,7 +78,7 @@ export function encode(ui8a, charset) {
 /**
  * Decodes Base85 string.
  * @param {String} base85
- * @param {"ascii58"|"z85"|String} [charset="ascii58"]
+ * @param {"ascii58"|"z85"|String} [charset="z85"]
  * @return {Uint8Array}
  * */
 export function decode(base85, charset) {
