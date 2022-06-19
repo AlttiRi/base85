@@ -4,7 +4,12 @@
   "description": "",
   "type": "module",
   "main": "index.js",
-  "keywords": ["base85"],
+  "keywords": [
+    "base85", "ascii85", "z85"
+  ],
   "author": "Alt'tiRi",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@alttiri/util-node-js": "^1.3.3"
+  }
 }
