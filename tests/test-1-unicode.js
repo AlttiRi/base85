@@ -19,6 +19,7 @@ const wikiTextEncoded =
 
 const ascii85_UnicodeMap = [
     ["Man is distinguished", "9jqo^BlbD-BleB1DJ+*+F(f,q"],
+    [" carnal pleasure.",    "+Cei#DII?(E,9)oF*2M7/c"],
     [wikiText, wikiTextEncoded],
     ["",         ""],
     ["A",        "5l"],
@@ -40,6 +41,7 @@ const ascii85_UnicodeMap = [
 
 const z85_UnicodeMap = [
     ["Man is distinguished", "o<}]Zx(+zcx(!xgzFa9aB7/b}"],
+    [" carnal pleasure.",    "ay!&2zEEu7Abo8]B9hIme="],
     ["",         ""],
     ["A",        "k("],
     ["AB",       "k%+"],
