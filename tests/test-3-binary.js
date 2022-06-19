@@ -8,6 +8,7 @@ const binaryString = atob(base64);
 const imageBytes   = binaryStringToArrayBuffer(binaryString);
 
 const base85 = encode(imageBytes);
+console.log(base85);
 
 console.log("base64.length", base64.length);
 console.log("base85.length", base85.length);

@@ -1,6 +1,6 @@
 import {decode, encode} from "../index.js";
 
-const charset = "ascii58";
+const charset = "ascii85";
 const long = "a".repeat(1_000_002*5);
 
 

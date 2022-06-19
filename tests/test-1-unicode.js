@@ -18,6 +18,7 @@ const wikiTextEncoded =
     ">uD.RTpAKYo'+CT/5+Cei#DII?(E,9)oF*2M7/c"                                         // No ~>
 
 const ascii85_UnicodeMap = [
+    ["Man is distinguished", "9jqo^BlbD-BleB1DJ+*+F(f,q"],
     [wikiText, wikiTextEncoded],
     ["",         ""],
     ["A",        "5l"],
@@ -38,6 +39,7 @@ const ascii85_UnicodeMap = [
 ];
 
 const z85_UnicodeMap = [
+    ["Man is distinguished", "o<}]Zx(+zcx(!xgzFa9aB7/b}"],
     ["",         ""],
     ["A",        "k("],
     ["AB",       "k%+"],
@@ -59,11 +61,11 @@ const z85_UnicodeMap = [
 
 for (let i = 0; i < ascii85_UnicodeMap.length; i++) {
     const ab = utf8StringToArrayBuffer(ascii85_UnicodeMap[i][0])
-    eq("ascii85-enc" + i, encode(ab, "ascii58"), ascii85_UnicodeMap[i][1]);
+    eq("ascii85-enc" + i, encode(ab, "ascii85"), ascii85_UnicodeMap[i][1]);
 }
 for (let i = 0; i < ascii85_UnicodeMap.length; i++) {
     const ab = utf8StringToArrayBuffer(ascii85_UnicodeMap[i][0])
-    const result = arrayBufferToUtf8String(decode(encode(ab, "ascii58"), "ascii58"));
+    const result = arrayBufferToUtf8String(decode(encode(ab, "ascii85"), "ascii85"));
     eq("ascii85-enc-dec" + i, result, ascii85_UnicodeMap[i][0]);
 }
 for (let i = 0; i < z85_UnicodeMap.length; i++) {

@@ -1,14 +1,14 @@
-const ascii58 = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
+const ascii85 = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
 const z85     = charsetToMap(`0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`);
 
 const pow2 = 85 * 85;
 const pow3 = 85 * 85 * 85;
 const pow4 = 85 * 85 * 85 * 85;
 
-/** @param {"ascii58"|"z85"|String} [charset="z85"]
+/** @param {"ascii85"|"z85"|String} [charset="z85"]
  *  @return {Uint8Array}  */
 function getMap(charset = "z85") {
-    if (charset === "ascii58") {return ascii58;}
+    if (charset === "ascii85") {return ascii85;}
     if (charset?.length === 85) {
         return charsetToMap(charset);
     }
@@ -36,7 +36,7 @@ function getReverseMap(mapOrig) {
 /**
  * Returns Base85 string.
  * @param {Uint8Array} ui8a
- * @param {"ascii58"|"z85"|String} [charset="z85"]
+ * @param {"ascii85"|"z85"|String} [charset="z85"]
  * @return {String}
  * */
 export function encode(ui8a, charset) {
@@ -78,7 +78,7 @@ export function encode(ui8a, charset) {
 /**
  * Decodes Base85 string.
  * @param {String} base85
- * @param {"ascii58"|"z85"|String} [charset="z85"]
+ * @param {"ascii85"|"z85"|String} [charset="z85"]
  * @return {Uint8Array}
  * */
 export function decode(base85, charset) {
