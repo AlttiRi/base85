@@ -44,4 +44,4 @@ const output = arrayBufferToUtf8String(outputBytes);
 console.log(output); // "Man is distinguished"
 ```
 
-For more examples see the tests.
+For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/tests).
