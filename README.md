@@ -49,3 +49,7 @@ For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/
 ---
 
 Note: the optimisation for `"ascii58"` by replacing `"\0\0\0\0"` by `"z"` instead of `"!!!!!"` and `"    "` (4 spaces) by `"y"` instead of `"+<VdL"` is not supported.
+
+---
+
+You can test the lib online in the browser's console: https://alttiri.github.io/base85/online
