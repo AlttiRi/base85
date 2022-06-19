@@ -23,13 +23,18 @@
         }
     </style>
     <script type="module">
-        import {decode, encode} from "./index.js";
+        import {Tester} from "https://alttiri.github.io/util-node-js/src/tester.js";
+        globalThis.Tester = Tester;
+
         import * as util from "./tests/util.js";
         Object.assign(globalThis, util);
+        
+        import {decode, encode} from "./index.js";
         globalThis.decode = decode;
         globalThis.encode = encode;
         globalThis.b85 = {decode, encode};
         globalThis.util = util;
+
         console.log("b85", globalThis.b85);
     </script>
 </head>
