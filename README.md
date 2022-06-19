@@ -46,10 +46,17 @@ console.log(output); // "Man is distinguished"
 
 For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/tests).
 
----
-
-Note: the optimisation for `"ascii85"` by replacing `"\0\0\0\0"` by `"z"` instead of `"!!!!!"` and `"    "` (4 spaces) by `"y"` instead of `"+<VdL"` is not supported.
 
 ---
 
 You can test the lib online in the browser's console: https://alttiri.github.io/base85/online
+
+All required things are already in the global scope. (`encode`, `decode`; util functions: `utf8StringToArrayBuffer` and others; `Tester` class too.)
+
+---
+
+Note.
+The optimisation for `"ascii85"` by replacing `"\0\0\0\0"` by `"z"` instead of `"!!!!!"` and `"    "` (4 spaces) by `"y"` instead of `"+<VdL"` is not supported.
+
+Anyway nobody forbids you to do something like `base85.replaceAll("!!!!!", "z")` as well as to add `"<~"`, `"~>"` manually if you need it.
+
