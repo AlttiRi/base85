@@ -45,3 +45,7 @@ console.log(output); // "Man is distinguished"
 ```
 
 For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/tests).
+
+---
+
+Note: the optimisation for `"ascii58"` by replacing `"\0\0\0\0"` by `"z"` instead of `"!!!!!"` and `"    "` by `"y"` instead of `"+<VdL"` is not supported.
