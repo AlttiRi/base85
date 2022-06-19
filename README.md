@@ -36,7 +36,7 @@ If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`Tex
 ```js
 const input = "Man is distinguished";
 const inputBytes = utf8StringToArrayBuffer(input);
-console.log(encode(inputBytes, "ascii58"))); // "9jqo^BlbD-BleB1DJ+*+F(f,q"
+console.log(encode(inputBytes, "ascii58"));  // "9jqo^BlbD-BleB1DJ+*+F(f,q"
 console.log(encode(inputBytes, "z85"));      // "o<}]Zx(+zcx(!xgzFa9aB7/b}"
 
 const outputBytes = decode("9jqo^BlbD-BleB1DJ+*+F(f,q", "ascii58");
