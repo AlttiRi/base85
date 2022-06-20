@@ -5,7 +5,9 @@
   "type": "module",
   "main": "index.js",
   "keywords": [
-    "base85", "ascii85", "z85"
+    "base85",
+    "ascii85",
+    "z85"
   ],
   "author": "Alt'tiRi",
   "license": "MIT",
