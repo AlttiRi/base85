@@ -1,5 +1,5 @@
-import {decode, encode} from "../index.js";
 import {Tester} from "@alttiri/util-node-js";
+import {decode, encode} from "../index.js";
 import {arrayBufferToUtf8String, utf8StringToArrayBuffer} from "./util.js";
 
 
