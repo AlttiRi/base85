@@ -60,3 +60,15 @@ The optimisation for `"ascii85"` by replacing `"\0\0\0\0"` by `"z"` instead of `
 
 Anyway nobody forbids you to do something like `base85.replaceAll("!!!!!", "z")` as well as to add `"<~"`, `"~>"` manually if you need it.
 
+
+---
+To install you need fisrt to create `.npmrc` file with `@alttiri:registry=https://npm.pkg.github.com` content:
+```bash
+echo @alttiri:registry=https://npm.pkg.github.com >> .npmrc
+```
+
+only then run
+
+```bash
+npm install @alttiri/base85
+```
