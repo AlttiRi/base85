@@ -72,3 +72,5 @@ only then run
 ```bash
 npm install @alttiri/base85
 ```
+
+Or just copy-paste the file, it's standalone.
