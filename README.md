@@ -1,5 +1,5 @@
 # base85
-Pretty fast base85 JavaScript library.
+[Pretty fast](https://github.com/AlttiRi/base85/blob/17792f90abe78856840b468f4a319f8d99e41ca5/tests/test-2-speed.js#L23-L45) base85 JavaScript library.
 
 Aimed to encoding binary data (`Uint8Array`).
 
