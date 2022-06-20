@@ -42,6 +42,13 @@ decode: 40.662ms
 total: 111.481ms
 input   === output3: true
 output1 === output3: true
+
+--- huandu/node-ascii85 ---
+encode: 768.081ms
+decode: 63.721ms
+total: 832.394ms
+input   === output4: true
+output1 === output4: true
  */
 
 
@@ -94,3 +101,27 @@ console.log("input   === output3:", input === output3);
 console.log("output1 === output3:", output1 === output3);
 
 */
+
+/*
+// Uncomment and install "ascii85"
+
+// -----------------------------------
+console.log("\n--- huandu/node-ascii85 ---");
+// https://github.com/huandu/node-ascii85
+import ascii85 from "ascii85";
+
+let ZeroMQ = ascii85.ZeroMQ;
+
+console.time("total");
+console.time("encode");
+const encoded3 = ZeroMQ.encode(input).toString();
+console.timeEnd("encode");
+
+console.time("decode");
+const output4 = ZeroMQ.decode(encoded3).toString();
+console.timeEnd("decode");
+console.timeEnd("total");
+
+console.log("input   === output4:", input === output4);
+console.log("output1 === output4:", output1 === output4);
+ */
