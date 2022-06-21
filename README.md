@@ -62,6 +62,9 @@ Anyway nobody forbids you to do something like `base85.replaceAll("!!!!!", "z")`
 
 
 ---
+## Installation
+
+### From GitHub Packages
 To install you need fisrt to create `.npmrc` file with `@alttiri:registry=https://npm.pkg.github.com` content:
 ```bash
 echo @alttiri:registry=https://npm.pkg.github.com >> .npmrc
@@ -74,5 +77,11 @@ npm install @alttiri/base85
 ```
 Note, that GitHub Packages requires to have also `~/.npmrc` file with `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
 
+### From GitHub:
+Or install it from GitHub directly:
+```bash
+npm install git+https://github.com/AlttiRi/base85.git
+```
 
-Or just copy-paste the file, it's standalone.
+### Only the required file
+Or just copy-paste the file from the repo. It's standalone.
