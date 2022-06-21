@@ -78,10 +78,11 @@ npm install @alttiri/base85
 Note, that GitHub Packages requires to have also `~/.npmrc` file with `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
 
 ### From GitHub:
-Or install it from GitHub directly:
+Or install the lastest version from GitHub directly:
 ```bash
 npm install git+https://github.com/AlttiRi/base85.git
 ```
+No need extra actions, but there is no versioning support.
 
 ### Only the required file
 Or just copy-paste the file from the repo. It's standalone.
