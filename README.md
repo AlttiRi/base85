@@ -82,7 +82,7 @@ Or install the lastest version from GitHub directly:
 ```bash
 npm install git+https://github.com/AlttiRi/base85.git
 ```
-No need extra actions. Also you can specify a semver with adding, for example, `#semver:1.1.1`.
+No need extra actions. Also you can specify a semver with appending, for example, `#semver:1.1.1` to git-URL.
 
 ### Only the required file
 Or just copy-paste the file from the repo. It's standalone.
