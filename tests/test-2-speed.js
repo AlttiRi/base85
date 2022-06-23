@@ -1,4 +1,4 @@
-import {decode, encode} from "../index.js";
+import {decode, encode} from "../base85.js";
 
 const input = "QWERTY1234".repeat(100_000*5);
 console.log(`Input: ${input.length} chars string`);

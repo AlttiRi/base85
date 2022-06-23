@@ -32,7 +32,7 @@
         import * as util from "./tests/util.js";
         Object.assign(globalThis, util);
 
-        import {decode, encode} from "./index.js";
+        import {decode, encode} from "./base85.js";
         globalThis.decode = decode;
         globalThis.encode = encode;
         globalThis.b85 = {decode, encode};

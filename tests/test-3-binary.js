@@ -1,5 +1,5 @@
 import {arrayBufferToBinaryString, binaryStringToArrayBuffer} from "./util.js";
-import {decode, encode} from "../index.js";
+import {decode, encode} from "../base85.js";
 
 // 169 bytes image data URL
 const dataUrl = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA+SURBVEhL7dIxCgAwCMVQ739pu/yh0JYgXfNWlSxWv9UhgwkDyAAygAygXEo/8k032dhkMGEAGUAGkAHQvQC3veR+Ql0lAQAAAABJRU5ErkJggg==`;
