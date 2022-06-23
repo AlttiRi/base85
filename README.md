@@ -75,7 +75,7 @@ only then run
 ```bash
 npm install @alttiri/base85
 ```
-Note, that GitHub Packages requires to have also `~/.npmrc` file with `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
+Note, that GitHub Packages requires to have also `~/.npmrc` file by `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
 
 ### From GitHub:
 Or install the lastest version from GitHub directly:
