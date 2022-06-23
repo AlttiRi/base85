@@ -83,9 +83,14 @@ Note, that GitHub Packages requires to have also `~/.npmrc` file by `//npm.pkg.g
 ### From GitHub
 Or install the lastest version from GitHub directly:
 ```bash
-npm install git+https://github.com/AlttiRi/base85.git
+npm install git+https://github.com/alttiri/base85.git
 ```
 No need extra actions. Also you can specify a semver with appending, for example, `#semver:1.2.0` to git-URL.
+
+The same by adding this line in `package.json`'s `dependencies` field:
+```json
+"@alttiri/base85": "github:alttiri/base85#semver:1.2.0"
+```
 
 ### Only the required file
 Or just copy-paste the file from the repo. It's standalone.
