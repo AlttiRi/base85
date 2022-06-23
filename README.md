@@ -3,7 +3,8 @@
 
 Aimed to encoding binary data (`Uint8Array`).
 
----
+
+## API
 
 ### `function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | String) : String`
 
@@ -15,7 +16,9 @@ Aimed to encoding binary data (`Uint8Array`).
 
 `charset` is "z85" by default.
 
----
+
+## Examples
+
 
 Binary data encoding example:
 ```js
@@ -77,7 +80,7 @@ npm install @alttiri/base85
 ```
 Note, that GitHub Packages requires to have also `~/.npmrc` file by `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
 
-### From GitHub:
+### From GitHub
 Or install the lastest version from GitHub directly:
 ```bash
 npm install git+https://github.com/AlttiRi/base85.git
