@@ -100,11 +100,11 @@ npm install git+https://github.com/alttiri/base85.git
 
 - **Based on a commit hash:**
     ```bash
-    npm install git+https://git@github.com/alttiri/base85.git#b9c5bde12887c46427428e4e186a8f6b4e7ede92
+    npm install git+https://git@github.com/alttiri/base85.git#bb6b4bf6a734f23e63c69f9aff4c5e4c2b5c035b
     ```
   Or add
     ```
-    "@alttiri/base85": "github:alttiri/base85#b9c5bde12887c46427428e4e186a8f6b4e7ede92"
+    "@alttiri/base85": "github:alttiri/base85#bb6b4bf6a734f23e63c69f9aff4c5e4c2b5c035b"
     ```
   as `dependencies` in `package.json` file.
 
