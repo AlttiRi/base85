@@ -65,10 +65,54 @@ Anyway nobody forbids you to do something like `base85.replaceAll("!!!!!", "z")`
 
 
 ---
+
 ## Installation
 
-### From GitHub Packages
-To install you need fisrt to create `.npmrc` file with `@alttiri:registry=https://npm.pkg.github.com` content:
+### From NPM
+
+```bash
+npm install @alttiri/base85
+```
+
+### From GitHub repository
+
+```bash
+npm install git+https://github.com/alttiri/base85.git
+```
+
+<details>
+
+<summary>More ways</summary>
+
+### From GitHub repository (a specific version):
+
+- **Based on SemVer:**
+    ```bash
+    npm install git+https://github.com/alttiri/base85.git#semver:1.3.0
+    ```
+  Or add
+    ```
+    "@alttiri/base85": "github:alttiri/base85#semver:1.3.0"
+    ```
+  as `dependencies` in `package.json` file.
+
+  See available [tags](https://github.com/AlttiRi/base85/tags).
+
+- **Based on a commit hash:**
+    ```bash
+    npm install git+https://git@github.com/alttiri/base85.git#c98d3919e9002fa5738680a2c76004fd12746ce3
+    ```
+  Or add
+    ```
+    "@alttiri/base85": "github:alttiri/base85#c98d3919e9002fa5738680a2c76004fd12746ce3"
+    ```
+  as `dependencies` in `package.json` file.
+
+  See available [commits hashes](https://github.com/AlttiRi/base85/commits/master).
+
+
+### From GitHub Packages:
+To install you need first to create `.npmrc` file with `@alttiri:registry=https://npm.pkg.github.com` content:
 ```bash
 echo @alttiri:registry=https://npm.pkg.github.com >> .npmrc
 ```
@@ -78,19 +122,6 @@ only then run
 ```bash
 npm install @alttiri/base85
 ```
-Note, that GitHub Packages requires to have also `~/.npmrc` file by `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new. 
+Note, that GitHub Packages requires to have also `~/.npmrc` file (`.npmrc` in your home dir) with `//npm.pkg.github.com/:_authToken=TOKEN` content, where `TOKEN` is a token with the `read:packages` permission, take it here https://github.com/settings/tokens/new.
 
-### From GitHub
-Or install the lastest version from GitHub directly:
-```bash
-npm install git+https://github.com/alttiri/base85.git
-```
-No need extra actions. Also you can specify a semver with appending, for example, `#semver:1.2.0` to git-URL.
-
-The same by adding this line in `package.json`'s `dependencies` field:
-```json
-"@alttiri/base85": "github:alttiri/base85#semver:1.2.0"
-```
-
-### Only the required file
-Or just copy-paste the file from the repo. It's standalone.
+</details>
