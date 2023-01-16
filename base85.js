@@ -115,3 +115,6 @@ export function decode(base85, charset) {
 
     return ints;
 }
+
+const base85 = {encode, decode};
+export default base85;
