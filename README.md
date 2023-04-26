@@ -1,7 +1,7 @@
 # base85
 [Pretty fast](https://github.com/AlttiRi/base85/blob/7a6edf4b9c0b16e0d63e35c0c102c1875f78ddb0/tests/test-2-speed.js#L23-L52) base85 JavaScript library (with TS support).
 
-It is designed to encode binary data (`Uint8Array`) into a "base85" text string.
+It is designed to encode binary data (`Uint8Array`) into a "base85" text string and vice versa.
 
 ```bash
 npm install @alttiri/base85
@@ -11,11 +11,11 @@ npm install @alttiri/base85
 
 #### `function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | string) : string`
 
-[`encode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L42) encodes the input `Uint8Array` into base85 `String`.
+[`encode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L42) encodes the input `Uint8Array` into base85 `string`.
 
 #### `function decode(base85: string, charset?: "ascii85" | "z85" | string) : Uint8Array`
 
-[`decode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L84) decodes the input base85 `String` into `Uint8Array`.
+[`decode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L84) decodes the input base85 `string` into `Uint8Array`.
 
 `charset` is "z85" by default.
 
