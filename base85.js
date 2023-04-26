@@ -1,14 +1,16 @@
 const ascii85 = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
 const z85     = charsetToMap(`0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`);
 
-const pow2 = 85 * 85;
-const pow3 = 85 * 85 * 85;
-const pow4 = 85 * 85 * 85 * 85;
+const pow2 = 85 ** 2;
+const pow3 = 85 ** 3;
+const pow4 = 85 ** 4;
 
 /** @param {"ascii85" | "z85" | string} [charset="z85"]
  *  @return {Uint8Array}  */
 function getMap(charset = "z85") {
-    if (charset === "ascii85") {return ascii85;}
+    if (charset === "ascii85") {
+        return ascii85;
+    }
     if (charset?.length === 85) {
         return charsetToMap(charset);
     }
@@ -23,6 +25,7 @@ function charsetToMap(charset) {
     }
     return ui8a;
 }
+
 /** @param {Uint8Array} mapOrig
  *  @return {Uint8Array}  */
 function getReverseMap(mapOrig) {
@@ -43,7 +46,7 @@ export function encode(ui8a, charset) {
     const charMap = getMap(charset);
     const remain = ui8a.length % 4;
     const last5Length = remain ? remain + 1 : 0;
-    const length = Math.ceil(ui8a.length * 5/4);
+    const length = Math.ceil(ui8a.length * 5 / 4);
     const target = new Uint8Array(length);
 
     const dw = new DataView(ui8a.buffer);
@@ -51,7 +54,7 @@ export function encode(ui8a, charset) {
     for (let i = 0; i < to; i++) {
         let num = dw.getUint32(4 * i);
         for (let k = 4; k >= 0; k--) {
-            target[k + i*5] = charMap[num % 85];
+            target[k + i * 5] = charMap[num % 85];
             num = Math.trunc(num / 85);
         }
     }
@@ -83,7 +86,7 @@ export function encode(ui8a, charset) {
  * */
 export function decode(base85, charset) {
     const map = getMap(charset);
-    const revMap  = getReverseMap(map);
+    const revMap = getReverseMap(map);
 
     const base85ab = new TextEncoder().encode(base85);
     const pad = (5 - (base85ab.length % 5)) % 5;
@@ -92,12 +95,12 @@ export function decode(base85, charset) {
     let dw = new DataView(ints.buffer);
     let i = 0;
     for (; i < base85ab.length / 5 - 1; i++) {
-        const c1 = revMap[base85ab[i*5 + 4]];
-        const c2 = revMap[base85ab[i*5 + 3]] * 85;
-        const c3 = revMap[base85ab[i*5 + 2]] * pow2;
-        const c4 = revMap[base85ab[i*5 + 1]] * pow3;
-        const c5 = revMap[base85ab[i*5    ]] * pow4;
-        dw.setUint32(i * 4, c1+c2+c3+c4+c5);
+        const c1 = revMap[base85ab[i * 5 + 4]];
+        const c2 = revMap[base85ab[i * 5 + 3]] * 85;
+        const c3 = revMap[base85ab[i * 5 + 2]] * pow2;
+        const c4 = revMap[base85ab[i * 5 + 1]] * pow3;
+        const c5 = revMap[base85ab[i * 5    ]] * pow4;
+        dw.setUint32(i * 4, c1 + c2 + c3 + c4 + c5);
     }
 
     const lCh = map[map.length - 1];
@@ -108,9 +111,9 @@ export function decode(base85, charset) {
     const c3 = revMap[lastPart[2]] * pow2;
     const c4 = revMap[lastPart[1]] * pow3;
     const c5 = revMap[lastPart[0]] * pow4;
-    dw.setUint32(0, c1+c2+c3+c4+c5);
+    dw.setUint32(0, c1 + c2 + c3 + c4 + c5);
     for (let j = 0; j < 4 - pad; j++) {
-        ints[i*4 + j] = lastPart[j];
+        ints[i * 4 + j] = lastPart[j];
     }
 
     return ints;
