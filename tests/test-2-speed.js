@@ -1,6 +1,7 @@
 import {decode, encode} from "../base85.js";
 
-const input = "QWERTY1234".repeat(100_000*5);
+
+const input = "QWERTY1234".repeat(100_000 * 5);
 console.log(`Input: ${input.length} chars string`);
 
 
@@ -20,6 +21,7 @@ console.timeEnd("decode");
 console.timeEnd("total");
 
 console.log("input === output1:", input === output1);
+
 
 /*
 Input: 5000000 chars string
@@ -50,7 +52,8 @@ decode: 63.721ms
 total: 832.394ms
 input   === output4: true
 output1 === output4: true
- */
+*/
+
 
 // -----------------------------------
 // Uncomment and "npm install base85" (4.69 MB of node_modules)
@@ -73,6 +76,7 @@ console.log("input   === output2:", input === output2);
 console.log("output1 === output2:", output1 === output2);
 */
 
+
 // -----------------------------------
 // Uncomment and copy-paste the code from GitHub
 // https://github.com/Sheep-y/Base85/blob/master/javascript/base85.js
@@ -82,7 +86,6 @@ console.log("\n--- Sheep-y/Base85 ---");
 (function() {})(
     ...
 );
-
 
 console.time("total");
 console.time("encode");
@@ -96,8 +99,8 @@ console.timeEnd("total");
 
 console.log("input   === output3:", input === output3);
 console.log("output1 === output3:", output1 === output3);
-
 */
+
 
 // -----------------------------------
 // Uncomment and install "npm install ascii85"
