@@ -72,10 +72,10 @@ const output2 = base85.decode(encoded2).toString();
 console.timeEnd("decode");
 console.timeEnd("total");
 
-console.log("input   === output2:", input === output2);
-console.log("output1 === output2:", output1 === output2);
+console.log("input    === output2: ", input    ===  output2);
+console.log("encoded1 === encoded2:", encoded1 === encoded2);
+console.log("output1  === output2: ", output1  ===  output2);
 */
-
 
 // -----------------------------------
 // Uncomment and copy-paste the code from GitHub
@@ -97,10 +97,10 @@ const output3 = Base85.Z85Decoder.decode(encoded3);
 console.timeEnd("decode");
 console.timeEnd("total");
 
-console.log("input   === output3:", input === output3);
-console.log("output1 === output3:", output1 === output3);
+console.log("input    === output3: ", input    ===  output3);
+console.log("encoded1 === encoded3:", encoded1 === encoded3);
+console.log("output1  === output3: ", output1  ===  output3);
 */
-
 
 // -----------------------------------
 // Uncomment and install "npm install ascii85"
@@ -114,14 +114,15 @@ let ZeroMQ = ascii85.ZeroMQ;
 
 console.time("total");
 console.time("encode");
-const encoded3 = ZeroMQ.encode(input).toString();
+const encoded4 = ZeroMQ.encode(input).toString();
 console.timeEnd("encode");
 
 console.time("decode");
-const output4 = ZeroMQ.decode(encoded3).toString();
+const output4 = ZeroMQ.decode(encoded4).toString();
 console.timeEnd("decode");
 console.timeEnd("total");
 
-console.log("input   === output4:", input === output4);
-console.log("output1 === output4:", output1 === output4);
+console.log("input    === output4: ", input    ===  output4);
+console.log("encoded1 === encoded4:", encoded1 === encoded4);
+console.log("output1  === output4: ", output1  ===  output4);
 */
