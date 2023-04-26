@@ -3,13 +3,14 @@ import {decode, encode} from "../base85.js";
 const input = "QWERTY1234".repeat(100_000*5);
 console.log(`Input: ${input.length} chars string`);
 
+
 // -----------------------------------
 console.log("\n--- AlttiRi/base85 ---");
 
 console.time("total");
 console.time("encode");
-const encodedAb = new TextEncoder().encode(input);
-const encoded1 = encode(encodedAb);
+const inputAb = new TextEncoder().encode(input);
+const encoded1 = encode(inputAb);
 console.timeEnd("encode");
 
 console.time("decode");
@@ -51,18 +52,16 @@ input   === output4: true
 output1 === output4: true
  */
 
-
-// Uncomment and install "base85"
-/*
 // -----------------------------------
-console.log("\n--- noseglid/base85 ---");
+// Uncomment and "npm install base85" (4.69 MB of node_modules)
 // https://github.com/noseglid/base85
-
-
+// -----------------------------------
+/*
+console.log("\n--- noseglid/base85 ---");
 import base85 from "base85";
 console.time("total");
 console.time("encode");
-const encoded2 =  base85.encode(input).toString();
+const encoded2 = base85.encode(input);
 console.timeEnd("encode");
 
 console.time("decode");
@@ -74,14 +73,12 @@ console.log("input   === output2:", input === output2);
 console.log("output1 === output2:", output1 === output2);
 */
 
-
-// Uncomment and copy-paste the code from GitHub
-/*
 // -----------------------------------
-console.log("\n--- Sheep-y/Base85 ---");
-
-// put code here from
+// Uncomment and copy-paste the code from GitHub
 // https://github.com/Sheep-y/Base85/blob/master/javascript/base85.js
+// -----------------------------------
+/*
+console.log("\n--- Sheep-y/Base85 ---");
 (function() {})(
     ...
 );
@@ -102,12 +99,12 @@ console.log("output1 === output3:", output1 === output3);
 
 */
 
-/*
-// Uncomment and install "ascii85"
-
 // -----------------------------------
-console.log("\n--- huandu/node-ascii85 ---");
+// Uncomment and install "npm install ascii85"
 // https://github.com/huandu/node-ascii85
+// -----------------------------------
+/*
+console.log("\n--- huandu/node-ascii85 ---");
 import ascii85 from "ascii85";
 
 let ZeroMQ = ascii85.ZeroMQ;
@@ -124,4 +121,4 @@ console.timeEnd("total");
 
 console.log("input   === output4:", input === output4);
 console.log("output1 === output4:", output1 === output4);
- */
+*/
