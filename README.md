@@ -91,11 +91,11 @@ npm install git+https://github.com/alttiri/base85.git
 
 - **Based on SemVer:**
     ```bash
-    npm install git+https://github.com/alttiri/base85.git#semver:1.4.0
+    npm install git+https://github.com/alttiri/base85.git#semver:1.5.1
     ```
   Or add
     ```
-    "@alttiri/base85": "github:alttiri/base85#semver:1.4.0"
+    "@alttiri/base85": "github:alttiri/base85#semver:1.5.1"
     ```
   as `dependencies` in `package.json` file.
 
