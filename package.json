@@ -1,11 +1,12 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Pretty fast base85 JavaScript library",
   "author": "alttiri",
   "license": "MIT",
   "type": "module",
   "main": "base85.js",
+  "types": "base85.d.ts",
   "keywords": [
     "base85",
     "ascii85",
