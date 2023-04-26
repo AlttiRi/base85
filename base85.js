@@ -36,8 +36,8 @@ function getReverseMap(mapOrig) {
 /**
  * Returns Base85 string.
  * @param {Uint8Array} ui8a
- * @param {"ascii85"|"z85"|String} [charset="z85"]
- * @return {String}
+ * @param {"ascii85"|"z85"|string} [charset="z85"]
+ * @return {string}
  * */
 export function encode(ui8a, charset) {
     const charMap = getMap(charset);
