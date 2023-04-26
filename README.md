@@ -3,6 +3,9 @@
 
 It is designed to encode binary data (`Uint8Array`) into a "base85" text string.
 
+```bash
+npm install @alttiri/base85
+```
 
 ## API
 
