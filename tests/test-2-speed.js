@@ -56,7 +56,7 @@ output1 === output4: true
 
 
 // -----------------------------------
-// Uncomment and "npm install base85" (4.69 MB of node_modules)
+// Uncomment and "npm install base85" (4.68 MB of node_modules)
 // https://github.com/noseglid/base85
 // -----------------------------------
 /*
