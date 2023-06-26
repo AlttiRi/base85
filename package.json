@@ -1,6 +1,6 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Pretty fast base85 JavaScript library",
   "author": "alttiri",
   "license": "MIT",
@@ -20,6 +20,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "base85.ts",
+    "base85.d.js"
+  ],
   "scripts": {
     "publish-npm": "npm publish --registry=https://registry.npmjs.org",
     "publish-ghp": "npm publish --registry=https://npm.pkg.github.com",
