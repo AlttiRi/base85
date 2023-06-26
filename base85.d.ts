@@ -8,6 +8,8 @@ type CharSet = string;
  * @return {string}
  * */
 export function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | CharSet): string
+/** Alias to encode. */
+export function encodeBase85(ui8a: Uint8Array, charset?: "ascii85" | "z85" | CharSet): string
 
 /**
  * Decodes Base85 string.
@@ -17,7 +19,10 @@ export function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | CharSet):
  * */
 export function decode(base85: string, charset?: "ascii85" | "z85" | CharSet): Uint8Array
 
+/** Alias to decode. */
+export function decodeBase85(base85: string, charset?: "ascii85" | "z85" | CharSet): Uint8Array
+
 type base85 = {
-    encode, decode
+    encode, decode, encodeBase85, decodeBase85
 };
 export default base85;

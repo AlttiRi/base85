@@ -119,5 +119,8 @@ export function decode(base85, charset) {
     return ints;
 }
 
-const base85 = {encode, decode};
+export const encodeBase85 = encode;
+export const decodeBase85 = decode;
+
+const base85 = {encode, decode, encodeBase85, decodeBase85};
 export default base85;

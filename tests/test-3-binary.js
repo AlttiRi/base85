@@ -1,5 +1,5 @@
 import {arrayBufferToBinaryString, binaryStringToArrayBuffer} from "./util.js";
-import {decode, encode} from "../base85.js";
+import {decodeBase85, encodeBase85} from "../base85.js";
 
 // 169 bytes image data URL
 const dataUrl = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA+SURBVEhL7dIxCgAwCMVQ739pu/yh0JYgXfNWlSxWv9UhgwkDyAAygAygXEo/8k032dhkMGEAGUAGkAHQvQC3veR+Ql0lAQAAAABJRU5ErkJggg==`;
@@ -7,14 +7,14 @@ const base64 = dataUrl.slice("data:image/png;base64,".length);
 const binaryString = atob(base64);
 const imageBytes   = binaryStringToArrayBuffer(binaryString);
 
-const base85 = encode(imageBytes);
+const base85 = encodeBase85(imageBytes);
 console.log(base85);
 
 console.log("base64.length", base64.length);
 console.log("base85.length", base85.length);
 console.log("base64.length > base85.length", base64.length > base85.length);
 
-const imageBytes_2   = decode(base85);
+const imageBytes_2   = decodeBase85(base85);
 const binaryString_2 = arrayBufferToBinaryString(imageBytes_2)
 const base64_2       = btoa(binaryString_2);
 
