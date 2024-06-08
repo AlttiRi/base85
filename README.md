@@ -11,11 +11,11 @@ npm install @alttiri/base85
 
 #### `function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | string): string`
 
-[`encode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L42) encodes the input `Uint8Array` into base85 `string`.
+[`encode`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/base85.ts#L48) encodes the input `Uint8Array` into base85 `string`.
 
 #### `function decode(base85: string, charset?: "ascii85" | "z85" | string): Uint8Array`
 
-[`decode`](https://github.com/AlttiRi/base85/blob/42343e624f27ec68aa936a274c297ccd6c15c8cb/index.js#L84) decodes the input base85 `string` into `Uint8Array`.
+[`decode`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/base85.ts#L90) decodes the input base85 `string` into `Uint8Array`.
 
 `charset` is "z85" by default.
 
@@ -26,6 +26,8 @@ Also, there are `encodeBase85` and `decodeBase85` aliases for `encode` and `deco
 
 Binary data encoding example:
 ```js
+import {encodeBase85} from "@alttiri/base85";
+
 // png image, 169 bytes
 const imageBytes = new Uint8Array([137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,32,0,0,0,32,8,2,0,0,0,252,24,237,163,0,0,0,1,115,82,71,66,0,174,206,28,233,0,0,0,4,103,65,77,65,0,0,177,143,11,252,97,5,0,0,0,9,112,72,89,115,0,0,14,195,0,0,14,195,1,199,111,168,100,0,0,0,62,73,68,65,84,72,75,237,210,49,10,0,48,8,197,80,239,127,105,187,252,161,208,150,32,93,243,86,149,44,86,191,213,33,131,9,3,200,0,50,128,12,160,92,74,63,242,77,55,217,216,100,48,97,0,25,64,6,144,1,208,189,0,183,189,228,126,66,93,37,1,0,0,0,0,73,69,78,68,174,66,96,130]);
 const base85 = encodeBase85(imageBytes);
@@ -38,7 +40,7 @@ console.log(base85.length);
 
 ---
 
-If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`TextDecoder`](https://github.com/AlttiRi/base85/blob/1b04256730cbbedcb6dbbd7e14fe4a6ac7575ce2/tests/util.js#L17-L29).
+If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`TextDecoder`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/tests/util.js#L17-L29).
 
 ```js
 const input = "Man is distinguished";
@@ -56,7 +58,7 @@ For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/
 
 ---
 
-~You can test the lib online in the browser's console: https://alttiri.github.io/base85/online~ _(todo: fix it)_
+You can test the lib online in the browser's console: https://alttiri.github.io/base85/online
 
 All required things are already in the global scope. (`encode`, `decode`; util functions: `utf8StringToArrayBuffer` and others; `Tester` class too.)
 
