@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // It very notable slow-downs the object instancing for the "target" is less than "ES2022" if is set to `true`.
+    "useDefineForClassFields": false,
+
+    "target": "es2020",
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop":   true,
+    "isolatedModules":   true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "alwaysStrict":     true,
+    "noImplicitAny":    true,
+    "noImplicitThis":   true,
+
+    "allowJs": false,
+
+    "noEmit": false,
+    "declaration": true,
+    "sourceMap": false
+  },
+  "files": [
+    "base85.ts"
+  ]
+}

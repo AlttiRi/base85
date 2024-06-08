@@ -1,6 +1,6 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Pretty fast base85 JavaScript library",
   "author": "alttiri",
   "license": "MIT",
@@ -21,15 +21,20 @@
     "access": "public"
   },
   "files": [
-    "base85.ts",
+    "base85.js",
     "base85.d.ts"
   ],
   "scripts": {
+    "compile-ts":       "tsc --build",
+    "compile-ts-watch": "tsc --build --watch",
+    "clean-ts":         "tsc --build --clean",
+    "#": "",
     "publish-npm": "npm publish --registry=https://registry.npmjs.org",
     "publish-ghp": "npm publish --registry=https://npm.pkg.github.com",
-    "#": "",
-    "unpublish-npm": "npm unpublish @alttiri/base85@1.6.0 --registry=https://registry.npmjs.org",
+    "test-publish": "npm pack",
     "##": "",
+    "unpublish-npm": "npm unpublish @alttiri/base85@1.6.0 --registry=https://registry.npmjs.org",
+    "###": "",
     "login-npm": "npm login --registry=https://registry.npmjs.org",
     "login-ghp": "npm login --registry=https://npm.pkg.github.com"
   },

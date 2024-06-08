@@ -1,4 +1,4 @@
-/** @param {String} binaryString
+/** @param {string} binaryString
  *  @return {Uint8Array}  */
 export function binaryStringToArrayBuffer(binaryString) {
     const u8Array = new Uint8Array(binaryString.length);
@@ -9,7 +9,7 @@ export function binaryStringToArrayBuffer(binaryString) {
 }
 
 /** @param {Uint8Array} arrayBuffer
- *  @return {String}  */
+ *  @return {string}  */
 export function arrayBufferToBinaryString(arrayBuffer) {
     return arrayBuffer.reduce((accumulator, byte) => accumulator + String.fromCharCode(byte), "");
 }
