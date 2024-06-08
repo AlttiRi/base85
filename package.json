@@ -1,6 +1,6 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Pretty fast base85 JavaScript library",
   "author": "alttiri",
   "license": "MIT",
