@@ -1,12 +1,12 @@
 /** 85 unique characters string */
 type CharSet = string;
 
-const ascii85 = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
-const z85     = charsetToMap(`0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`);
+const ascii85: Uint8Array = charsetToMap(`!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\`abcdefghijklmnopqrstu`);
+const z85:     Uint8Array = charsetToMap(`0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#`);
 
-const pow2 = 85 ** 2;
-const pow3 = 85 ** 3;
-const pow4 = 85 ** 4;
+const pow2 = 7225;     // 85 ** 2
+const pow3 = 614125;   // 85 ** 3
+const pow4 = 52200625; // 85 ** 4
 
 /** @param {"ascii85" | "z85" | string} [charset="z85"]
  *  @return {Uint8Array}  */
@@ -14,7 +14,7 @@ function getMap(charset: "ascii85" | "z85" | string = "z85"): Uint8Array {
     if (charset === "ascii85") {
         return ascii85;
     }
-    if (charset?.length === 85) {
+    if (charset.length === 85) {
         return charsetToMap(charset);
     }
     return z85;
