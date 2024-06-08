@@ -1,6 +1,6 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Pretty fast base85 JavaScript library",
   "author": "alttiri",
   "license": "MIT",
@@ -34,6 +34,7 @@
     "login-ghp": "npm login --registry=https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@alttiri/util-node-js": "1.6.0"
+    "@alttiri/util-node-js": "2.0.16-20240606",
+    "typescript": "5.5.1-rc"
   }
 }

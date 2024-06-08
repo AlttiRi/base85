@@ -26,9 +26,6 @@
         }
     </style>
     <script type="module">
-        import {Tester} from "https://alttiri.github.io/util-node-js/src/tester.js";
-        globalThis.Tester = Tester;
-
         import * as util from "./tests/util.js";
         Object.assign(globalThis, util);
 
@@ -38,7 +35,10 @@
         globalThis.b85 = {decode, encode};
         globalThis.util = util;
 
-        console.log("b85", globalThis.b85);
+        const consoleCss = "color: #0D6EFD; font-weight: bold;";
+        console.log("%c Use the global `b85` object:", consoleCss, globalThis.b85);
+        console.log("%c Or just the global `encode` and `decode` functions from it.", consoleCss);
+        console.log("%c Also, util functions from the `util` object:", consoleCss, Object.keys(util));
     </script>
 </head>
 <body>
