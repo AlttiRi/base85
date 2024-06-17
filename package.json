@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@alttiri/util-node-js": "2.0.16-20240606",
+    "fflate": "0.8.2",
     "typescript": "5.5.1-rc"
   }
 }
