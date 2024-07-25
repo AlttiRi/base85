@@ -1,32 +1,38 @@
 {
   "compilerOptions": {
-    // It very notable slow-downs the object instancing for the "target" is less than "ES2022" if is set to `true`.
-    "useDefineForClassFields": false,
-
-    "target": "es2020",
+    "target": "ES2020",
     "lib": ["ES2021", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "esModuleInterop":   true,
-    "isolatedModules":   true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
 
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "alwaysStrict":     true,
-    "noImplicitAny":    true,
-    "noImplicitThis":   true,
-
-    "allowJs": false,
-
+    /* Library preset */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": false,
     "noEmit": false,
     "declaration": true,
-    "sourceMap": false
+
+    "useDefineForClassFields": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowJs": false,
+
+    "strict": true,
+    "strictNullChecks":    true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch":   true,
+    "alwaysStrict":   true,
+    "noImplicitAny":  true,
+    "noImplicitThis": true,
   },
-  "files": [
-    "base85.ts"
+  /* Library preset */
+  "include": [
+    "base85.ts",
   ]
 }
+
+// Note:
+// `useDefineForClassFields` very notable slow-downs the object instancing
+// for the "target" is less than "ES2022" if is set to `true`.

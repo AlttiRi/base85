@@ -1,18 +1,21 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Pretty fast base85 JavaScript library",
-  "author": "alttiri",
-  "license": "MIT",
-  "type": "module",
-  "main": "base85.js",
-  "types": "base85.d.ts",
+  "homepage": "https://github.com/alttiri/base85",
   "keywords": [
     "base85",
     "ascii85",
     "z85"
   ],
-  "homepage": "https://github.com/alttiri/base85",
+  "license": "MIT",
+  "type": "module",
+  "main": "base85.js",
+  "types": "base85.d.ts",
+  "files": [
+    "base85.js",
+    "base85.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/alttiri/base85.git"
@@ -20,18 +23,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "base85.js",
-    "base85.d.ts"
-  ],
   "scripts": {
     "compile-ts":       "tsc --build",
     "compile-ts-watch": "tsc --build --watch",
     "clean-ts":         "tsc --build --clean",
     "#": "",
-    "publish-npm": "npm publish --registry=https://registry.npmjs.org",
-    "publish-ghp": "npm publish --registry=https://npm.pkg.github.com",
-    "test-publish": "npm pack",
+    "test-publish": "tsc --build && npm pack",
+    "publish-npm":  "tsc --build && npm publish --registry=https://registry.npmjs.org",
+    "publish-ghp":  "tsc --build && npm publish --registry=https://npm.pkg.github.com",
     "##": "",
     "unpublish-npm": "npm unpublish @alttiri/base85@1.6.0 --registry=https://registry.npmjs.org",
     "###": "",
@@ -39,8 +38,8 @@
     "login-ghp": "npm login --registry=https://npm.pkg.github.com"
   },
   "devDependencies": {
-    "@alttiri/util-node-js": "2.0.16-20240606",
+    "@alttiri/util-node-js": "2.1.1-20240725",
     "fflate": "0.8.2",
-    "typescript": "5.5.1-rc"
+    "typescript": "5.5.4"
   }
 }
