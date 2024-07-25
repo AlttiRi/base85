@@ -32,11 +32,11 @@
         import {decode, encode} from "./base85.js";
         globalThis.decode = decode;
         globalThis.encode = encode;
-        globalThis.b85 = {decode, encode};
+        globalThis.base85 = globalThis.b85 = {decode, encode};
         globalThis.util = util;
 
         const consoleCss = "color: #0D6EFD; font-weight: bold;";
-        console.log("%c Use the global `b85` object:", consoleCss, globalThis.b85);
+        console.log("%c Use the global `base85` object:", consoleCss, globalThis.base85);
         console.log("%c Or just the global `encode` and `decode` functions from it.", consoleCss);
         console.log("%c Also, util functions from the `util` object:", consoleCss, Object.keys(util));
     </script>
