@@ -60,7 +60,7 @@ For more examples see [the tests](https://github.com/AlttiRi/base85/tree/master/
 
 You can test the lib online in the browser's console: https://alttiri.github.io/base85/online
 
-All required things are already in the global scope. (`encode`, `decode`; util functions: `utf8StringToArrayBuffer` and others; `Tester` class too.)
+All required things are already in the global scope. (`encode`, `decode`; util functions: `utf8StringToArrayBuffer` and others.)
 
 ---
 
