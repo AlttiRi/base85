@@ -43,7 +43,7 @@ export function encode(ui8a, charset) {
     const last5Length = remain ? remain + 1 : 0;
     const length = Math.ceil(ui8a.length * 5 / 4);
     const target = new Uint8Array(length);
-    const dw = new DataView(ui8a.buffer);
+    const dw = new DataView(ui8a.buffer, ui8a.byteOffset, ui8a.byteLength);
     const to = Math.trunc(ui8a.length / 4);
     for (let i = 0; i < to; i++) {
         let num = dw.getUint32(4 * i);

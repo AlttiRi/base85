@@ -1,6 +1,6 @@
 {
   "name": "@alttiri/base85",
-  "version": "1.7.6",
+  "version": "1.8.0",
   "description": "Pretty fast base85 JavaScript library",
   "homepage": "https://github.com/alttiri/base85",
   "keywords": [
