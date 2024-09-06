@@ -11,11 +11,11 @@ npm install @alttiri/base85
 
 #### `function encode(ui8a: Uint8Array, charset?: "ascii85" | "z85" | string): string`
 
-[`encode`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/base85.ts#L48) encodes the input `Uint8Array` into base85 `string`.
+[`encode`](https://github.com/AlttiRi/base85/blob/45b6cf40a85c475855f739cecd98845b4ede2b1e/base85.ts#L48) encodes the input `Uint8Array` into base85 `string`.
 
 #### `function decode(base85: string, charset?: "ascii85" | "z85" | string): Uint8Array`
 
-[`decode`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/base85.ts#L90) decodes the input base85 `string` into `Uint8Array`.
+[`decode`](https://github.com/AlttiRi/base85/blob/45b6cf40a85c475855f739cecd98845b4ede2b1e/base85.ts#L90) decodes the input base85 `string` into `Uint8Array`.
 
 `charset` is "z85" by default.
 
@@ -40,7 +40,7 @@ console.log(base85.length);
 
 ---
 
-If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`TextDecoder`](https://github.com/AlttiRi/base85/blob/473721c67aa01a3bd8920fe63ea1b8eca3af30fa/tests/util.js#L17-L29).
+If you need to encode a text _(are you really need it?)_ [use `TextEncoder`/`TextDecoder`](https://github.com/AlttiRi/base85/blob/45b6cf40a85c475855f739cecd98845b4ede2b1e/tests/util.js#L17-L29).
 
 ```js
 const input = "Man is distinguished";
