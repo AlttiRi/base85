@@ -1,4 +1,4 @@
-# base85
+# [base85](https://github.com/AlttiRi/base85)
 [Pretty fast](https://github.com/AlttiRi/base85/blob/7a6edf4b9c0b16e0d63e35c0c102c1875f78ddb0/tests/test-2-speed.js#L23-L52) base85 JavaScript library (with TS support).
 
 It is designed to encode binary data (`Uint8Array`) into a "base85" text string and vice versa.
